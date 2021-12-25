@@ -4,9 +4,7 @@ import figlet from 'figlet';
 
 import files from './lib/files.js';
 import { getStoredGithubToken, getPersonalAccesToken, initOctokit } from './lib/github.js';
-
-import { exec } from 'child_process'
-
+import { initVuePOroject } from './lib/vue.js'
 clear();
 
 console.log(
@@ -15,17 +13,13 @@ console.log(
     )
 );
 
-if (files.directoryExists('.git')) {
-    console.log(chalk.red('Already a Git repository!'));
-    process.exit();
-}
-
 const run = async () => {
     let token = getStoredGithubToken();
     if (!token) {
         token = await getPersonalAccesToken();
     }
     initOctokit()
+    initVuePOroject()
 };
 
 run()
